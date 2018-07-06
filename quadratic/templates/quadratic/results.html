@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<h2>Equation is: {{ coefficients.a }}x<sup>2</sup> + {{ coefficients.b }}x + {{ coefficients.c }} = 0</h2>
+<p>Coefficients:</p>
+    <li>a  = {{ coefficients.a }} {{ val_desc.a }}</li>
+    <li>b  = {{ coefficients.b }} {{ val_desc.b }}</li>
+    <li>c  = {{ coefficients.c }} {{ val_desc.c }}</li>
+<p>{% if discriminant %} Discriminant: {{ discriminant }} {% endif %} </p>
+<p> {% if not result and discriminant < 0 %} Discriminant is less than zero, the equation can`t be resolved
+    {% elif not result and not discriminant < 0 %} Can`t solve the equation
+    {% elif not result.1 %} <b>There is one solution to the above equation:</b> x = {{ result }}
+    {% else %} <b>There are two solutions to the above equation:</b> x<sub>1</sub> = {{ result.0 }}; x<sub>2</sub> = {{ result.1 }}
+                                     {% endif %}
+</body>
+</html>
