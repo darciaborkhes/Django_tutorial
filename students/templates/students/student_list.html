@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>ooniversity</title>
+
+    <!-- Bootstrap -->
+  <!--   {% load staticfiles %}
+    <link href= -->
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+   
+  </head>
+<body>
+
+
+    <nav class="navbar navbar-default navbar-bright">
+      <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+          <a class="navbar-brand home-tab menu-buttons" href="{% url 'courses:course_list' %}">Home</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav">
+            <li class="deactivated"><a href="{% url 'courses:course_list' %}">Main<span class="sr-only menu-buttons"></span></a></li>
+            <li class="deactivated">Contact<span class="sr-only menu-buttons"></span></a></li>
+            <li class="activated"><a href="{% url 'students:student_list' %}">Students<span class="sr-only menu-buttons"></span></a></li>
+            
+        </div>
+       </div>
+    </nav>
+
+<h2>Students list:</h2>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="row">#</th>
+      <th scope="col">Name and Surname</th>
+      <th scope="col">Address</th>
+      <th scope="col">Phone</th>
+      <th scope="col">Skype</th>
+      <th scope="col">Courses</th>
+    </tr>
+  </thead>
+  
+  <tbody>
+  {% for student in student_list %}
+    <tr>
+      <td>{{ student.id }}</td>
+      <td>{{ student.name }}  {{ student.surname}}</td>
+      <td>{{ student.address }}</td>
+      <td>{{ student.phone }}</td>
+      <td>{{ student.skype }}</td>
+      <td>{{ student.courses.name }}</td>
+    </tr>
+  {% endfor %}
+  </tbody>
+  
+</table>
+</body>

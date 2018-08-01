@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>ooniversity</title>
+
+    <!-- Bootstrap -->
+  <!--   {% load staticfiles %}
+    <link href= -->
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+   
+  </head>
+<body>
+
+
+  
+    <nav class="navbar navbar-default navbar-bright">
+      <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+          <a class="navbar-brand home-tab menu-buttons" href="{% url 'courses:course_list' %}">Home</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav">
+            <li class="activated"><a href="{% url 'courses:course_list' %}">Main<span class="sr-only menu-buttons"></span></a></li>
+            <li class="deactivated">Contact<span class="sr-only menu-buttons"></span></a></li>
+            <li class="deactivated"><a href="{% url 'students:student_list' %}">Students<span class="sr-only menu-buttons"></span></a></li>
+            
+        </div>
+       </div>
+    </nav>
+
+<div class="jumbotron">
+  <h1 class="display-4">Ooniversity</h1>
+  <p class="lead">We are specializing on the 'trending' programming languages. Our courses mainly differs from other by the extensive use of practical exercises and strict homework policies.</p>
+</div>
+
+<h2>Choose the course for yourself from the below:</h2>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Course</th>
+      <th scope="col">Description</th>
+    </tr>
+  </thead>
+  
+  <tbody>
+  {% for course in all_courses_list %}
+    <tr>
+    
+      <td><a href="{% url 'courses:detail' course.id %}">{{ course.name }}</a></td>
+      <td>{{ course.short_description }}</td>
+    
+    </tr>
+  {% endfor %}
+  </tbody>
+  
+</table>
+</body>
