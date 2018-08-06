@@ -50,14 +50,15 @@
   </thead>
   
   <tbody>
-  {% for student in student_list %}
+  {% for student in students_list %}
     <tr>
       <td>{{ student.id }}</td>
-      <td>{{ student.name }}  {{ student.surname}}</td>
+      <td><a href="{{ student.id }}">{{ student.name }} {{ student.surname}}</a></td>
       <td>{{ student.address }}</td>
       <td>{{ student.phone }}</td>
       <td>{{ student.skype }}</td>
-      <td>{{ student.courses.name }}</td>
+
+      <td>{% for course in student.courses.all %}<a href="{% url 'courses:detail' course.id %}"> {{ course }} </a></br> {% endfor %}</td>
     </tr>
   {% endfor %}
   </tbody>

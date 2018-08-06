@@ -14,6 +14,7 @@ class DetailView(generic.DetailView):
     model = Course
     template_name = 'courses/detail.html'
 
+
 class ContactView(generic.TemplateView):
     template_name = 'courses/contact.html'
 
