@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>coaches</title>
+
+    <!-- Bootstrap -->
+  <!--   {% load staticfiles %}
+    <link href= -->
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+
+  </head>
+<body>
+
+
+    <nav class="navbar navbar-default navbar-bright">
+      <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+          <a class="navbar-brand home-tab menu-buttons" href="{% url 'courses:course_list' %}">Home</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav">
+            <li class="deactivated"><a href="{% url 'courses:course_list' %}">Main<span class="sr-only menu-buttons"></span></a></li>
+            <li class="deactivated">Contact<span class="sr-only menu-buttons"></span></li>
+            <li class="activated"><a href="{% url 'students:student_list' %}">Students<span class="sr-only menu-buttons"></span></a></li>
+
+        </div>
+       </div>
+    </nav>
+
+<h1>{{ coach.user.first_name }} {{ coach.user.last_name }}</h1>
+
+<table class="table">
+
+  <tbody>
+      <tr>
+      <th>Birth Date</th>
+      <td>{{ coach.date_of_birth }}</td>
+      </tr>
+      <tr>
+      <th>Address</th>
+      <td>{{ coach.address }}</td>
+      </tr>
+      <tr>
+      <th>Email</th>
+      <td>{{ coach.user.email }}</td>
+      </tr>
+      <tr>
+      <th>Skype</th>
+      <td>{{ coach.skype }}</td>
+      </tr>
+      <tr>
+      <th>Phone</th>
+      <td>{{ coach.phone }}</td>
+      </tr>
+      <tr>
+      <th>Courses as Coach</th>
+
+          <td>{% for course in coach.coach_courses.all %}<a href="{% url 'courses:detail' course.id %}"> {{ course }}  </a> Students<a href="{% url 'students:student_list' %}?course_id={{ course.id }}"><span class="glyphicon glyphicon-new-window" aria-hidden="true"></span></a> <br>{% endfor %} </td>
+
+      </tr>
+      <tr>
+      <th>Courses as Assistant</th>
+
+          <td>{% for course in coach.assistant_courses.all %}<a href="{% url 'courses:detail' course.id %}"> {{ course }} </a>Students<a href="{% url 'students:student_list' %}?course_id={{ course.id }}"><span class="glyphicon glyphicon-new-window" aria-hidden="true"></span></a> <br> {% endfor %}</td>
+
+      </tr>
+
+
+
+  </tbody>
+
+</table>

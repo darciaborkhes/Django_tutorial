@@ -1,0 +1,12 @@
+li.deactivated {background-color: lavender;font-size: 120%;color:skyblue;border: 0.5px solid seashell;}
+li.activated {background-color: purple;font-size: 160%;color:aqua;border: 0.5px solid seashell;}
+nav.navbar-bright {background-color: lavender;border: 0.5px solid seashell;}
+a.home-tab {background-color: lavender;font-size: 160%;color:aqua;border: 0.5px solid seashell;}
+div.jumbo-bright {background-color: lavender;font-size: 87%;color:gray;border: 0.5px solid seashell; font-style: oblique;font-family: "Lucida Console"; }
+h1.main-header {color:purple; font-style:normal;font-size:79px;}
+h2.big-header {color:indigo; font-style:normal}
+div.frame {border: 2px solid seashell;width:800px}
+div.body {background-color: lavender}
+div.course-content {background-color: lavender;border: 0.5px solid seashell;font-size: 150%;font-style: oblique;font-family: "Lucida Console";color:gray;}
+li.menu-buttons {color:white;}
+table.width {column-width: 50%}

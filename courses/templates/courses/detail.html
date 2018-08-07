@@ -41,9 +41,34 @@
   <p class="lead">{{ course.description }}</p>
 </div>
 
+<h1>Course Teachers:</h1>
+    <hr>
+
+    <div class="panel panel-default">
+      <div class="panel-heading"><h2>Coach</h2></div>
+      <div class="panel-body">
+          {% if course.coach.id is not null %}<h3><a href="{% url 'coaches:coach_details' course.coach.id %}">{{ course.coach.user.first_name }} {{ course.coach.user.last_name }}</a></h3>
+          <p>{{ course.coach.description }}</p>
+
+          {% endif %}
+      </div>
+    </div>
+    <div class="panel panel-default">
+
+      <div class="panel-heading"><h2>Assistant</h2></div>
+      <div class="panel-body">
+          {% if course.assistant.id is not null %}
+          <h3><a href="{% url 'coaches:coach_details' course.assistant.id %}">{{ course.assistant.user.first_name }} {{ course.assistant.user.last_name }}</a></h3>
+          <p>{{ course.assistant.description }}</p>
+
+          {% endif %}
+      </div>
+
+    </div>
 
 
-<h2>Course Plan:</h2>
+
+<h1>Course Plan:</h1>
 
 <table class="table">
   <thead>
