@@ -1,74 +1,38 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <title>Course</title>
+{% extends "base.html" %}
 
-    <!-- Bootstrap -->
-  <!--   {% load staticfiles %}
-    <link href= -->
-    {% load static %}
-    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
-</head>
-<body>
+{% block title %} pyBursa - Course Details {% endblock title %}
 
-
-  
-    <nav class="navbar navbar-default navbar-bright">
-      <div class="container-fluid">
-        <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header">
-          <a class="navbar-brand home-tab menu-buttons" href="{% url 'courses:course_list' %}">Home</a>
-        </div>
-
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-          <ul class="nav navbar-nav">
-            <li class="deactivated"><a href="{% url 'courses:course_list' %}">Main<span class="sr-only menu-buttons"></span></a></li>
-            <li class="deactivated">Contact<span class="sr-only menu-buttons"></span></a></li>
-            <li class="deactivated"><a href="{% url 'students:student_list' %}?course_id={{ course.id }}" >Students<span class="sr-only menu-buttons"></span></a></li>
-
-            
-        </div>
-       </div>
-    </nav>
-
+{% block main_content %}
 <div class="jumbotron">
   <h1 class="display-4">{{ course.name }}</h1>
-  <p class="lead">{{ course.description }}</p>
+  <p class="lead">{{ course.description|truncatechars:32 }}</p>
 </div>
 
 <h1>Course Teachers:</h1>
     <hr>
-
     <div class="panel panel-default">
       <div class="panel-heading"><h2>Coach</h2></div>
       <div class="panel-body">
           {% if course.coach.id is not null %}<h3><a href="{% url 'coaches:coach_details' course.coach.id %}">{{ course.coach.user.first_name }} {{ course.coach.user.last_name }}</a></h3>
           <p>{{ course.coach.description }}</p>
-
           {% endif %}
       </div>
     </div>
     <div class="panel panel-default">
-
       <div class="panel-heading"><h2>Assistant</h2></div>
       <div class="panel-body">
           {% if course.assistant.id is not null %}
           <h3><a href="{% url 'coaches:coach_details' course.assistant.id %}">{{ course.assistant.user.first_name }} {{ course.assistant.user.last_name }}</a></h3>
           <p>{{ course.assistant.description }}</p>
-
           {% endif %}
       </div>
-
     </div>
 
-
-
 <h1>Course Plan:</h1>
+
+<button type="button" class="btn btn-primary"><a href="add_lesson.html" style="color:inherit">
+    Add a new lesson</a></button>
+
 
 <table class="table">
   <thead>
@@ -78,19 +42,15 @@
       <th scope="col">Description</th>
     </tr>
   </thead>
-  
   <tbody>
   {% for lesson in course.lesson_set.all %}
     <tr>
       <td>{{ lesson.order }}</td>
       <td>{{ lesson.subject }}</a></td>
       <td>{{ lesson.description }}</td>
-    
     </tr>
 {% endfor %}
   </tbody>
-  
 </table>	
 
-</body>
-</html>
+{% endblock main_content %}

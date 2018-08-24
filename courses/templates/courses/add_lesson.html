@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+
+{% block title %} pyBursa - Students List {% endblock title %}
+
+
+{% block nav_class_students_list %}active{% endblock %}
+
+
+{% block main_content %}
+
+<h1>Add a Course:</h1>
+
+<form method="post" >
+{% csrf_token %}
+{{ form.as_p }}
+ 
+<button type="submit" class="btn btn-default"&gt;Submit>Add lesson</button>
+</form>
+
+{% endblock main_content %}
