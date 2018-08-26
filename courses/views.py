@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.views import generic
 from .models import Course, Lesson
-from django import forms
+from .forms import CourseModelForm, LessonModelForm
 from django.contrib import messages
 # Create your views here.
 class HomeView(generic.ListView):
@@ -19,16 +19,6 @@ class DetailView(generic.DetailView):
 class ContactView(generic.TemplateView):
     template_name = 'courses/contact.html'
 
-
-class CourseModelForm(forms.ModelForm):
-    class Meta:
-        model = Course
-        exclude = ['short_description']
-class LessonModelForm(forms.ModelForm):
-    class Meta:
-        model = Lesson
-        exclude = ['order']
-
 def add_course(request):
     if request.method == 'POST':
         form = CourseModelForm(request.POST)
@@ -41,12 +31,15 @@ def add_course(request):
     return render(request, 'courses/add.html', {'form':form})
 
 def add_lesson(request, pk):
+    course_obj = Course.objects.get(id=pk)
     if request.method == 'POST':
-        form = LessonModelForm(request.POST)
-        if form.is_valid():
-            instance = form.save()
-            messages.success(request, '{} has been successfully added'.format(instance.name))
+        lesson_form = LessonModelForm(request.POST)
+        if lesson_form.is_valid():
+            instance = lesson_form.save(commit=False)
+            instance.course = course_obj
+            lesson_form.save()
+            messages.success(request, '{} has been successfully added'.format(instance.subject))
             return redirect('/courses/{}'.format(pk))
     else:
-        form = LessonModelForm()
-    return render(request, 'courses/add_lesson.html', {'form':form})
+        lesson_form = LessonModelForm()
+    return render(request, 'courses/add_lesson.html', {'lesson_form':lesson_form})
