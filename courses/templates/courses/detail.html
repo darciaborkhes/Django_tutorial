@@ -3,6 +3,13 @@
 {% block title %} pyBursa - Course Details {% endblock title %}
 
 {% block main_content %}
+{% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
 <div class="jumbotron">
   <h1 class="display-4">{{ course.name }}</h1>
   <p class="lead">{{ course.description|truncatechars:32 }}</p>
@@ -30,16 +37,16 @@
 
 <h1>Course Plan:</h1>
 
-{% if messages %}
-<ul class="messages">
-    {% for message in messages %}
-    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
-    {% endfor %}
-</ul>
-{% endif %}
 
-<button type="button" class="btn btn-primary"><a href="add_lesson.html" style="color:inherit">
+
+<button type="button" class="btn btn-primary"><a href="add" style="color:inherit">
     Add a new lesson</a></button>
+
+<button type="button" class="btn btn-primary"><a href="../edit/{{course.id}}" style="color:inherit">
+    Edit course</a></button>
+
+<button type="button" class="btn btn-primary"><a href="../remove/{{course.id }}" style="color:inherit">
+    Delete course</a></button>
 
 
 <table class="table">

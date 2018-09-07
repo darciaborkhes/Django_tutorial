@@ -43,3 +43,27 @@ def add_lesson(request, pk):
     else:
         lesson_form = LessonModelForm()
     return render(request, 'courses/add_lesson.html', {'lesson_form':lesson_form})
+
+def edit_course(request, pk):
+    course_obj = Course.objects.get(id=pk)
+    if request.method == 'POST':
+        form = CourseModelForm(request.POST,instance=course_obj)
+        if form.is_valid():
+            course_obj = form.save()
+            messages.success(request, '{} has been successfully saved'.format(course_obj.name))
+            return redirect('/courses/{}'.format(pk))
+    else:
+        form = CourseModelForm(instance=course_obj)
+        return render(request, 'courses/edit_course.html', {'form': form})
+
+def remove_course(request,pk):
+    course_obj = Course.objects.get(id=pk)
+    if request.method == 'POST':
+        form = CourseModelForm(request.POST, instance=course_obj)
+        if form.is_valid():
+            course_obj.delete()
+            messages.success(request, '{} was successfully deleted'.format(course_obj.name))
+            return redirect('/courses/')
+    else:
+        form = CourseModelForm(instance=course_obj)
+        return render(request, 'courses/remove_course.html', {'form': form})

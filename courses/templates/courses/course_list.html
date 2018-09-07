@@ -8,13 +8,6 @@
 
 
 {% block main_content %}
-
-
-{% include "inc_university_desc.html" %}
-
-
-<h2>Choose the course for yourself from the below:</h2>
-
 {% if messages %}
 <ul class="messages">
     {% for message in messages %}
@@ -22,6 +15,13 @@
     {% endfor %}
 </ul>
 {% endif %}
+
+{% include "inc_university_desc.html" %}
+
+
+<h2>Choose the course for yourself from the below:</h2>
+
+
 
 <button type="button" class="btn btn-primary"><a href="add.html" style="color:inherit">
     Add a new course</a></button>
