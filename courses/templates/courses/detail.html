@@ -39,22 +39,14 @@
 
 
 
-<button type="button" class="btn btn-primary"><a href="add" style="color:inherit">
-    Add a new lesson</a></button>
-
-<button type="button" class="btn btn-primary"><a href="../edit/{{course.id}}" style="color:inherit">
-    Edit course</a></button>
-
-<button type="button" class="btn btn-primary"><a href="../remove/{{course.id }}" style="color:inherit">
-    Delete course</a></button>
-
-
 <table class="table">
   <thead>
     <tr>
       <th scope="row">#</th>
       <th scope="col">Lesson</th>
       <th scope="col">Description</th>
+        <th></th>
+        <th></th>
     </tr>
   </thead>
   <tbody>
@@ -63,6 +55,8 @@
       <td>{{ lesson.order }}</td>
       <td>{{ lesson.subject }}</a></td>
       <td>{{ lesson.description }}</td>
+        <td><button type="button" class="btn btn-primary"><a href="{{ course.id }}/edit_lesson/{{ lesson.id }}" style="color:inherit">Edit lesson</a></button></td>
+        <td><button type="button" class="btn btn-primary"><a href="{{ course.id }}/remove_lesson/{{ lesson.id }}" style="color:inherit">Delete lesson</a></button></td>
     </tr>
 {% endfor %}
   </tbody>

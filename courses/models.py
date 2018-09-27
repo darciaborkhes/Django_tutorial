@@ -17,7 +17,7 @@ class Lesson(models.Model):
     subject = models.CharField(max_length = 100)
     description = models.TextField()
     course = models.ForeignKey(Course, on_delete=models.CASCADE)
-    order = models.PositiveIntegerField()
+    #order = models.PositiveIntegerField()
 
     def __str__(self):
         return self.subject

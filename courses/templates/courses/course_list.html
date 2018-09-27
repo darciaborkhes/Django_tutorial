@@ -8,13 +8,7 @@
 
 
 {% block main_content %}
-{% if messages %}
-<ul class="messages">
-    {% for message in messages %}
-    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
-    {% endfor %}
-</ul>
-{% endif %}
+
 
 {% include "inc_university_desc.html" %}
 
@@ -23,14 +17,16 @@
 
 
 
-<button type="button" class="btn btn-primary"><a href="add.html" style="color:inherit">
-    Add a new course</a></button>
+<button type="button" class="btn btn-primary"><a href="add" style="color:inherit">Add a new course</a></button>
 
 <table class="table">
   <thead>
     <tr>
       <th scope="col">Course</th>
       <th scope="col">Description</th>
+        <th></th>
+        <th></th>
+        <th></th>
     </tr>
   </thead>
   <tbody>
@@ -38,6 +34,9 @@
     <tr>
       <td><a href="{% url 'courses:detail' course.id %}">{{ course.name|upper }}</a></td>
       <td>{{ course.short_description|title }}</td>
+        <td><button type="button" class="btn btn-primary"><a href="{{ course.id }}/add_lesson" style="color:inherit">Add a new lesson</a></button></td>>
+        <td><button type="button" class="btn btn-primary"><a href="edit/{{course.id}}" style="color:inherit">Edit course</a></button></td>
+        <td><button type="button" class="btn btn-primary"><a href="remove/{{course.id }}" style="color:inherit">Delete course</a></button></td>
     </tr>
   {% endfor %}
   </tbody>

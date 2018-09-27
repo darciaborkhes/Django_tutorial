@@ -5,8 +5,8 @@ from .models import Course, Lesson
 class CourseModelForm(forms.ModelForm):
     class Meta:
         model = Course
-        exclude = ['short_description']
+        exclude = []
 class LessonModelForm(forms.ModelForm):
     class Meta:
         model = Lesson
-        exclude = ['course']
+        exclude = []

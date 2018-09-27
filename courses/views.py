@@ -3,6 +3,9 @@ from django.views import generic
 from .models import Course, Lesson
 from .forms import CourseModelForm, LessonModelForm
 from django.contrib import messages
+from django.views.generic.edit import UpdateView
+from django.urls import reverse_lazy
+from django.views.generic import CreateView
 # Create your views here.
 class HomeView(generic.ListView):
     context_object_name = 'all_courses_list'
@@ -30,19 +33,34 @@ def add_course(request):
         form = CourseModelForm()
     return render(request, 'courses/add.html', {'form':form})
 
-def add_lesson(request, pk):
-    course_obj = Course.objects.get(id=pk)
-    if request.method == 'POST':
-        lesson_form = LessonModelForm(request.POST)
-        if lesson_form.is_valid():
-            instance = lesson_form.save(commit=False)
-            instance.course = course_obj
-            lesson_form.save()
-            messages.success(request, '{} has been successfully added'.format(instance.subject))
-            return redirect('/courses/{}'.format(pk))
-    else:
-        lesson_form = LessonModelForm()
-    return render(request, 'courses/add_lesson.html', {'lesson_form':lesson_form})
+
+class LessonCreateView(CreateView):
+    model = Lesson
+    form_class = LessonModelForm
+    template_name = 'courses/add_lesson.html'
+    success_url = reverse_lazy('courses:detail')
+
+
+
+    def form_valid(self, form):
+        response = super().form_valid(form)
+        messages.success(self.request, 'The lesson has been added')
+        return response
+
+
+# def add_lesson(request, pk):
+#     course_obj = Course.objects.get(id=pk)
+#     if request.method == 'POST':
+#         lesson_form = LessonModelForm(request.POST)
+#         if lesson_form.is_valid():
+#             instance = lesson_form.save(commit=False)
+#             instance.course = course_obj
+#             lesson_form.save()
+#             messages.success(request, '{} has been successfully added'.format(instance.subject))
+#             return redirect('/courses/{}'.format(pk))
+#     else:
+#         lesson_form = LessonModelForm()
+#     return render(request, 'courses/add_lesson.html', {'lesson_form':lesson_form})
 
 def edit_course(request, pk):
     course_obj = Course.objects.get(id=pk)

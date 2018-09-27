@@ -9,11 +9,11 @@
 
 {% block main_content %}
 
-<h1>Add a Course:</h1>
+<h1>Add a Lesson:</h1>
 
 <form method="post" >
 {% csrf_token %}
-{{ lesson_form.as_p }}
+{{ form.as_p }}
  
 <button type="submit" class="btn btn-default"&gt;Submit>Add lesson</button>
 </form>
