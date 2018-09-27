@@ -13,8 +13,12 @@
 {% include "inc_university_desc.html" %}
 
 
+
 <h2>Students list:</h2>
 
+<p></p>
+<button type="button" class="btn btn-primary"><a href="add" style="color:inherit">Add student</a></button>
+<p></p>
 <table class="table">
   <thead>
     <tr>
@@ -24,6 +28,9 @@
       <th scope="col">Phone</th>
       <th scope="col">Skype</th>
       <th scope="col">Courses</th>
+      <th></th>
+      <th></th>
+
     </tr>
   </thead>
   
@@ -37,6 +44,9 @@
       <td>{{ student.skype }}</td>
 
       <td>{% for course in student.courses.all %}<a href="{% url 'courses:detail' course.id %}"> {{ course }} </a></br> {% endfor %}</td>
+
+      <td><button type="button" class="btn btn-primary"><a href="edit/{{student.id}}" style="color:inherit">Edit student</a></button></td>
+      <td><button type="button" class="btn btn-primary"><a href="remove/{{student.id }}" style="color:inherit">Delete student</a></button></td>
     </tr>
   {% endfor %}
   </tbody>
